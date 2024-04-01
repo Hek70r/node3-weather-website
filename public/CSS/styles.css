@@ -37,6 +37,15 @@ header a {
     margin-right: 16px;
 }
 
+.description {
+    display: flex;
+}
+
+.text {
+    padding: 16px;
+    letter-spacing: 1px
+}
+
 .portrait {
     max-width: 150px;
     max-height: 300px;

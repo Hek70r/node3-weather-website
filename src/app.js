@@ -20,25 +20,26 @@ hbs.registerPartials(partialsPath)
 
 // Setup static directiory to serve
 app.use(express.static(publicDirectoryPath))
-
+const myName = "Wiktor PLUHa"
 app.get('', (req, res) => {
-  res.render('index', {
+  return res.render('index', {
     title: 'WEATHER APP',
-    name: 'Andrzej Tatowski'
+    name: myName,
   })
 })
 
 app.get('/about', (req, res) => {
-  res.render('about', {
-    title: 'ABOUT kurwa ME',
-    name: 'Adrew Tatowski'
+  return res.render('about', {
+    title: 'ABOUT ME',
+    name: myName,
   })
 })
 
 app.get("/weather", (req, res) => {
   if (!req.query.address) {
-    return res.send({
-      error: 'You must provide an address!'
+    return res.render('index', {
+      title: 'WEATHER APP',
+      name: myName,
     })
   }
 
@@ -58,6 +59,7 @@ app.get("/weather", (req, res) => {
             error: forecastError
           })
         }
+        console.log(forecastData);
 
         return res.send({
           forecast: forecastData,
@@ -73,14 +75,14 @@ app.get("/help", (req, res) => {
   res.render('help', {
     helpText: 'This is some helpful text',
     title: 'HELP', 
-    name: 'Andrzej Tatowski'
+    name: myName,
   })
 });
 
 app.get('/help/*', (req, res) => {
   res.render('404', {
     title: '404',
-    name: 'Andrzej Tatowski',
+    name: myName,
     errorMessage: 'Help article not found'
   })
 })
@@ -88,14 +90,10 @@ app.get('/help/*', (req, res) => {
 app.get('*', (req, res) => {
   res.render('404', {
     title: '404',
-    name: 'Andrzej Tatowski',
+    name: myName,
     errorMessage: 'Page not found'
   })
 })
-
-// app.com
-// app.com/help
-// app.com/about
 
 app.listen(3000, () => {
   console.log("Server is up on port 3000");
